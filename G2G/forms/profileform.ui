@@ -364,7 +364,7 @@
   <customwidget>
    <class>ToolName</class>
    <extends>QWidget</extends>
-   <header>forms/toolname.h</header>
+   <header>toolname.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
