@@ -30,6 +30,9 @@ install:
   - ps: 7z x mpfr-all-CGAL-3.9.zip -oC:\dev\CGAL-5.0\auxiliary\gmp
   - ps: mkdir C:\local
   - ps: new-item -itemtype symboliclink -path C:\local -name boost_1_71_0 -value C:\Libraries\boost_1_71_0
+  - set QTDIR=C:\Qt\5.14.2\msvc2017_64
+  - set PATH=%PATH%;%QTDIR%\bin
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat" x64
 
 build_script:
     - mkdir bin
