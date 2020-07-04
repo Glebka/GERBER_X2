@@ -644,8 +644,8 @@ Paths VoronoiCreator::toPath(const Pairs& pairs)
     Paths paths;
     Pairs tmp = pairs;
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-    QList<Pair> tmp2(tmp.values());
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QList<Pair> tmp2(tmp.cbegin(), tmp.cend());
 #else
     QList<Pair> tmp2(tmp.toList());
 #endif
