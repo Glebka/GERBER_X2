@@ -12,27 +12,45 @@ matrix:
 
 platform:
   - x64
+  - x86
 
 configuration:
   - Release
 
-#  .\CGAL-5.0.2-Setup.exe /S /D=C:\dev\CGAL-5.0
-# https://cgal.geometryfactory.com/CGAL/precompiled_libs/auxiliary/x64/GMP/5.0.1/gmp-all-CGAL-3.9.zip
-# https://cgal.geometryfactory.com/CGAL/precompiled_libs/auxiliary/x64/MPFR/3.0.0/mpfr-all-CGAL-3.9.zip
-# qmake -config release
-#new-item -itemtype symboliclink -path C:\Libraries -name boost_1_71_0 -value C:\local\boost_1_71_0
+environment:
+  QT_VERSION: 5.14.2
+  QT_TOOLSET: msvc2017
+
+for:
+  -
+    matrix:
+      only:
+        - platform: x86
+    environment:
+      ALT_PLATFORM_NAME: win32
+      MSVC_PLATFORM_NAME: x86
+      QT_PLATFORM_POSTFIX: 
+    
+  -
+    matrix:
+      only:
+        - platform: x64
+    environment:
+      ALT_PLATFORM_NAME: x64
+      MSVC_PLATFORM_NAME: x64
+      QT_PLATFORM_POSTFIX: _64
 install:
   - ps: Start-FileDownload 'https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-5.0/CGAL-5.0-library.zip'
-  - ps: Start-FileDownload 'https://cgal.geometryfactory.com/CGAL/precompiled_libs/auxiliary/x64/GMP/5.0.1/gmp-all-CGAL-3.9.zip'
-  - ps: Start-FileDownload 'https://cgal.geometryfactory.com/CGAL/precompiled_libs/auxiliary/x64/MPFR/3.0.0/mpfr-all-CGAL-3.9.zip'
+  - ps: Start-FileDownload 'https://cgal.geometryfactory.com/CGAL/precompiled_libs/auxiliary/$env:ALT_PLATFORM_NAME/GMP/5.0.1/gmp-all-CGAL-3.9.zip'
+  - ps: Start-FileDownload 'https://cgal.geometryfactory.com/CGAL/precompiled_libs/auxiliary/$env:ALT_PLATFORM_NAME/MPFR/3.0.0/mpfr-all-CGAL-3.9.zip'
   - ps: 7z x CGAL-5.0-library.zip -oC:\dev -y
   - ps: 7z x gmp-all-CGAL-3.9.zip -oC:\dev\CGAL-5.0\auxiliary\gmp
   - ps: 7z x mpfr-all-CGAL-3.9.zip -oC:\dev\CGAL-5.0\auxiliary\gmp
   - ps: mkdir C:\local
   - ps: new-item -itemtype symboliclink -path C:\local -name boost_1_71_0 -value C:\Libraries\boost_1_71_0
-  - set QTDIR=C:\Qt\5.14.2\msvc2017_64
+  - set QTDIR=C:\Qt\%QT_VERSION%\%QT_TOOLSET%%QT_PLATFORM_POSTFIX%
   - set PATH=%PATH%;%QTDIR%\bin
-  - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat" x64
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat" %MSVC_PLATFORM_NAME%
 
 build_script:
     - mkdir bin
