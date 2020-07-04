@@ -12,7 +12,7 @@ matrix:
 
 platform:
   - x64
-#  - x86
+  - x86
 
 configuration:
   - Release
@@ -23,15 +23,15 @@ environment:
   ARTIFACT_NAME_PREFIX: Gerber2Gcode
 
 for:
-#  -
-#    matrix:
-#      only:
-#        - platform: x86
-#    environment:
-#      ALT_PLATFORM_NAME: win32
-#      MSVC_PLATFORM_NAME: x86
-#      QT_PLATFORM_POSTFIX: 
-#      ARTIFACT_NAME_POSFIX: x32
+  -
+    matrix:
+      only:
+        - platform: x86
+    environment:
+      ALT_PLATFORM_NAME: win32
+      MSVC_PLATFORM_NAME: x86
+      QT_PLATFORM_POSTFIX: 
+      ARTIFACT_NAME_POSFIX: x32
     
   -
     matrix:
