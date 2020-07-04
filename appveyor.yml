@@ -41,8 +41,8 @@ for:
       QT_PLATFORM_POSTFIX: _64
 install:
   - ps: Start-FileDownload 'https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-5.0/CGAL-5.0-library.zip'
-  - ps: Start-FileDownload 'https://cgal.geometryfactory.com/CGAL/precompiled_libs/auxiliary/$env:ALT_PLATFORM_NAME/GMP/5.0.1/gmp-all-CGAL-3.9.zip'
-  - ps: Start-FileDownload 'https://cgal.geometryfactory.com/CGAL/precompiled_libs/auxiliary/$env:ALT_PLATFORM_NAME/MPFR/3.0.0/mpfr-all-CGAL-3.9.zip'
+  - ps: Start-FileDownload "https://cgal.geometryfactory.com/CGAL/precompiled_libs/auxiliary/$env:ALT_PLATFORM_NAME/GMP/5.0.1/gmp-all-CGAL-3.9.zip"
+  - ps: Start-FileDownload "https://cgal.geometryfactory.com/CGAL/precompiled_libs/auxiliary/$env:ALT_PLATFORM_NAME/MPFR/3.0.0/mpfr-all-CGAL-3.9.zip"
   - ps: 7z x CGAL-5.0-library.zip -oC:\dev -y
   - ps: 7z x gmp-all-CGAL-3.9.zip -oC:\dev\CGAL-5.0\auxiliary\gmp
   - ps: 7z x mpfr-all-CGAL-3.9.zip -oC:\dev\CGAL-5.0\auxiliary\gmp
